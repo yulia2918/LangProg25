@@ -14,26 +14,46 @@ class Gen<T> {
 		System.out.println("Тип Т: " + ob.getClass().getName());
 	}
 }
-
+class TwoGen<T,V> {
+	//Объявление переменных обобщенных типов
+	T ob1;
+	V ob2;
+	//Определение конструктора, в качестве параметров указываем объекты обобщённоых типов
+	TwoGen(T o1, V o2) {
+		ob1 = o1;
+		ob2 = o2;
+	}
+	//Методы, возвращающий объекты
+	T getOb1() {
+		return ob1;
+	}
+	V getOb2() {
+		return ob2;
+	}
+	//Методы, получающие информацию об имени типов
+	void showTypes() {
+		System.out.println("Тип Т: " + ob1.getClass().getName());
+		System.out.println("Тип V: " + ob2.getClass().getName());
+	}
+}
 class pro1 {
 	public static void main(String[] args) {
-		//Создаём ссылочную переменную на объект типа интегер
-		Gen<Integer> iOb;
-		//Присваиваем ссылку на новый объект
-		iOb = new Gen<Integer>(88);
-		//выводим информацию о типе объекта
-		iOb.showType();
-		//присваиваем целой переменной значение, хранящееся в объектен
-		int v = iOb.getOb();
-		System.out.println("Значение: " + v);
+		Gen<String> strOb = new Gen<String>("один обобщённый тип");
+		String str = strOb.getOb();
+		System.out.println("Значение обобщённого типа с одним параметром: " + str);
+		//Создаём ссылочную переменную на объекты типа интегер и стринг
+		TwoGen<Integer, String> tgOb;
+		//Присваиваем ссылку на новые объекты
+		tgOb = new TwoGen<Integer, String>(88, "Обобщения");
+		//выводим информацию о типе объектов
+		tgOb.showTypes();
+		//присваиваем целой переменной значение, хранящееся в первом объекте
+		int v = tgOb.getOb1();
+		System.out.println("Значение в переменной v: " + v);
 
 		System.out.println();
-		//Создаем ссылочную переменную на объект типа стринг и присваиваем ссылку на новый объект
-		Gen<String> strOb = new Gen<String>("Строка обобщённого класса");
-		//Вывожим информацию о типе объекта
-		strOb.showType();
-		//Присваиваем строковой переменной значение, хранящееся в объекте
-		String str = strOb.getOb();
+		//Присваиваем строковой переменной значение, хранящееся во втором объекте
+		str = tgOb.getOb2();
 		System.out.println("Значение в переменной str: " + str);
 	}
 }
