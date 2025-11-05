@@ -1,3 +1,8 @@
+//пример обобщенного интерфейса
+interface Containment<T>  {
+	//проверка содержимого объекта некоторого класса на наличие указанного элемента
+	boolean contains(T o);
+}
 //обобщённые типы ограничиваются только теми классами, которые расширяют класс number
 class NumFns<T extends Number> { 
 	T num;
@@ -62,15 +67,51 @@ class GenM {
 	//метод определяющий совпадают ли содержимое двухмассивов
 	static <T extends Comparable<T>, V extends T> boolean arraysEqual(T[] x, V[] y) {
 		//сравнение длины массивов
-		if (x.lenght != y.lenght)
+		if(x.lenght != y.lenght)
 			return false;
+		
 		for(int i=0; i<x.lenght; i++)
 			if(!x[i].equals(y[i]))
 				return false;
 		return true;
 	}
 }
+//обобщённый конструктор 
+class Summation {
+	private int sum;
+	<T extends Number> Summation(T arg) {
+		sum = 0;
 
+		for (int i = 0; i <= arg.intValue(); i++)
+			sum += i;
+	}
+	int getSum() {
+		return sum;
+	}
+}
+
+//реализация обобщённого интерфейса
+class ClassGenInt<T> implements Containment<T> {
+	//класс реализующий обобщённый интерфейс должен быть обобщённым
+	T[] arrayRef;
+	ClassGenInt(T[] o) {
+		arrayRef = o;
+	}
+	//реализация метода conteins()
+	public boolean contains(T o) {
+		for(T x:arrayRef)
+			if(x.equals(o)) return true;
+		return false;
+	}
+}
+//при реализации обобщённого типа можно ограничить вот так:
+//class ClassGenInt2 implements Containment<Integer> {
+//. . .
+//}
+
+//class ClassGenInt3 <T extends Number> Containment<T> {
+//...
+//}
 class pr02 {
 	public static void main(String args[]) {
 		NumFns<Integer> iOb = new NumFns<Integer>(5);
@@ -129,22 +170,22 @@ class pr02 {
 		Integer nums3[] = {1, 2, 7, 4, 5};
 		Integer nums4[] = {1, 2, 7, 4, 5, 6};
 
-		if (GenM.arraysEqual(nums, nums))
+		if(GenM.arraysEqual(nums, nums))
 			System.out.println("Массив nums совпадает сам с собой");
-		if (GenM.arraysEqual(nums, nums2))
+		if(GenM.arraysEqual(nums, nums2))
 			System.out.println("Массив nums и nums2 совпадает");
-		if (GenM.arraysEqual(nums, nums3))
+		if(GenM.arraysEqual(nums, nums3))
 			System.out.println("Массив nums и nums3 совпадает");
-		if (GenM.arraysEquals(nums, nums4))
+		if(GenM.arraysEquals(nums, nums4))
 			System.out.println("Массив nums и nums4 совпадает");
 
 		String s1[] = {"первая строка", "вторая строка"};
 		String s2[] = {"первая строка", "вторая строка"};
 		String s3[] = {"первая строка", "вторая  строка"};
 
-		if (GenM.arraysEqual(s1, s2))
+		if(GenM.arraysEqual(s1, s2))
 			System.out.println("Массивы s1, s2 совпадают");
-		if (GenM.arraysEqual(s1, s3))
+		if(GenM.arraysEqual(s1, s3))
 			System.out.println("Массивы s1, s3 совпадают");
 
 		Number nums5[] = {1.0, 2.0, 3.0, 4.0, 5.0};
@@ -155,6 +196,41 @@ class pr02 {
 		//if (GenM.arraysEqual(nums6, nums5))
 		//	System.out.println("Массивы nums6, nums5 совпадают");
 
+		//использование класса с обобщённым констурктором
+		System.out.println();
+		Summation ob = new Summation(4.2);
+		System.out.println("Сумма целых чисел от 0 до 4.2 равна: " + ob.getSum());
 
+		System.out.println();
+		Summation ob2 = new Summation(4);
+		System.out.println("Сумма целых чисел от 0 до 4 равна: " + ob2.getSum());
+
+		//демонстрация использования реализации обобщённого интерфейса
+		System.out.println();
+		Integer x10[] = {1, 2, 3};
+		Double y10[] = {1.0, 2.0, 3.0};
+		ClassGenInt<Integer> ob3 = new ClassGenInt<Integer>(x10);
+
+		if (ob3.contains(2))
+			System.out.println("2 содержится в ob3");
+		else
+			System.out.println("2 не содержится в ob3");
+		
+		if (ob3.contains(4))
+			System.out.println("4 содержится в ob3");
+		else
+			System.out.println("4 не одержится в ob3");
+
+		ClassGenInt<Double> ob4 = new ClassGenInt<Double>(y10);
+
+		if (ob4.contains(2.0))
+			System.out.println("2.0 содержится в ob4");
+		else
+			System.out.println("2.0 не содержится в ob4");
+		
+		if (ob4.contains(4.0))
+			System.out.println("4.0 содержится в ob4");
+		else
+			System.out.println("4.0 не содерится в ob4");
 	}
 }
