@@ -30,10 +30,16 @@ class pr03 {
 				System.out.println("Исключительная ситуация: вызод за границы массива");
 			}
 			//обработка событий класса arithmeticexception
-			catch(ArithmeticException exc2) {
+			/*catch(ArithmeticException exc2) {
 				System.out.println("Исключительная ситуация: неверная арифметическая операция");
 			}
 			System.out.println("После оператора catch");
+		}*/
+		//использование класса Throwable для обработки всех видов исключений
+			catch (Throwable exc) {
+				System.out.println("Исключение для которого не написан спец. обработчик");
+			}
+
 		}
 	}
 }

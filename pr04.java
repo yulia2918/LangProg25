@@ -1,0 +1,22 @@
+class pr04 {
+	public static void main(String args[]) {
+		int number[] = {4,8,16,32,53,128,256,512};
+		int denom[] = {2,0,4,4,0,8};
+
+		try { //внешний блок try
+			for (int i =0; i< number.length; i++) {
+				try {//внутренний блок try
+				     System.out.println(number[i] + " / " + " = "  + number[i]/denom[i]);
+			 	}
+				catch(ArithmeticException exc) {
+					System.out.println("Недопустимая арифметическая операция");
+				}
+			}
+	        }
+		catch (ArrayIndexOutOfBoundsException exc) {
+			System.out.println("Выход за границы массива");
+			System.out.println("Аварийное завершение программы");
+		}	
+	}
+	
+}
