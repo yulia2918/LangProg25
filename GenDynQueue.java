@@ -1,5 +1,5 @@
-//обобщённый класс фиксированной очереди
-class GenQueue<T> implements IGenQ<T> {
+//обобщённый класс динамической очереди
+class GenDynQueue<T> implements IGenQ<T> {
 	private int putloc, getloc;
 	private T[] q;
 	public GenQueue(T[] aRef) {
@@ -7,8 +7,13 @@ class GenQueue<T> implements IGenQ<T> {
 		putloc = getloc = 0;
 	}
 	public void put(T obj) throws QueueFullException {
-		if (putloc==q.length)
-			throw new QueueFullException(q.length);
+		if (putloc==q.length) {
+			//T[] t = new T[q.length * 2];
+			for (int i =0; i<q.length; i++)
+				t[i] = q[i];
+			g=t;
+		}
+		//	throw new QueueFullException(q.length);
 		q[putloc++] = obj;
 	}
 	public T get() throws QueueEmptyException {
