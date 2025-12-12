@@ -29,12 +29,12 @@ class TCalc {
     //}
     
     public List<String> getNames() {
-        return new ArrayList<>(names);
+        return names;
     }
 
-    public int getTPercentage() {
+    /*public int getTPercentage() {
     	return tPercentage;
-    }
+    }*/
 
     public int getTPercentage(List<String> names) {
     	if(names.size() > 5) {
@@ -44,6 +44,41 @@ class TCalc {
 		return 10;
 	}
 
-	return 0;
+		return 0;
     }
+}
+class FP4 {
+	public static void main(String[] args) {
+		TCalc list1 = new TCalc();
+		
+		List<String> 11 = new ArrayList<>();
+		l1 = list1.addPerson(l1, "Ринат");
+		
+		System.out.println("Размер чаевых для l1: " + list1.getTPercentage(l1);
+		
+		List<String> l2 = new ArrayList<>();
+		for (int i=0; i<10; i++)
+			l2 = list1.addPerson(l1, "Юрий");
+		System.out.println("Размер чаевых для l1: " + list1.getTPercentage(l2);
+		
+		//тестирование чистой функции getTPercentage() для трех вариантов:
+		List<String> l3 = new ArrayList<>();
+		System.out.println("\nПроверка пустого списка");
+		
+		if (List1.getTPercentage(l3) == 0) {
+			System.out.println("работает правильно");
+		}
+		else {
+			System.out.println("Ошибка");
+		}
+
+		//список больше 5 человек
+
+		System.out.println("\nпроверка списка l2");
+		if (List1.getTPercentage(l2) == 20)
+			System.out.println("работает правильно");
+		else
+			System.out.println("Ошибка");
+		
+	}
 }
